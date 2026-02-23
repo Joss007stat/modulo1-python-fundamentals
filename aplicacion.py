@@ -17,14 +17,14 @@ elif opcion == "Ejercicio 1":
     
     st.title("Ejercicio 1 – Verificador de Presupuesto")
 
-    # 1️⃣ Solicitar datos
+    # 1 Solicitar datos
     presupuesto = st.number_input("Ingrese su presupuesto:", min_value=0.0, step=1.0)
     gasto = st.number_input("Ingrese su gasto:", min_value=0.0, step=1.0)
 
-    # 2️⃣ Botón para evaluar
+    # 2 Botón para evaluar
     if st.button("Evaluar presupuesto"):
 
-        # 3️⃣ Evaluar condición
+        # 3 Evaluar condición
         diferencia = presupuesto - gasto
 
         if gasto <= presupuesto:
@@ -32,7 +32,7 @@ elif opcion == "Ejercicio 1":
         else:
             st.warning("El presupuesto ha sido excedido ⚠️")
 
-        # 4️⃣ Mostrar diferencia
+        # 4 Mostrar diferencia
         st.write(f"Diferencia: {diferencia}")
 
 
@@ -41,17 +41,17 @@ elif opcion == "Ejercicio 2":
 
     st.title("Ejercicio 2 – Registro de Actividades Financieras")
 
-    # 1️⃣ Crear lista en memoria si no existe
+    # 1 Crear lista en memoria si no existe
     if "actividades" not in st.session_state:
         st.session_state.actividades = []
 
-    # 2️⃣ Inputs
+    # 2 Inputs
     nombre = st.text_input("Nombre de la actividad")
     tipo = st.selectbox("Tipo de actividad", ["Operativa", "Marketing", "Inversión", "Otro"])
     presupuesto = st.number_input("Presupuesto asignado", min_value=0.0, step=1.0)
     gasto_real = st.number_input("Gasto real", min_value=0.0, step=1.0)
 
-    # 3️⃣ Botón para agregar
+    # 3 Botón para agregar
     if st.button("Agregar actividad"):
 
         actividad = {
@@ -64,12 +64,12 @@ elif opcion == "Ejercicio 2":
         st.session_state.actividades.append(actividad)
         st.success("Actividad agregada correctamente")
 
-    # 4️⃣ Mostrar lista
+    # 4 Mostrar lista
     if st.session_state.actividades:
         st.subheader("Lista de actividades registradas")
         st.dataframe(st.session_state.actividades)
 
-        # 5️⃣ Evaluar cada actividad
+        # 5 Evaluar cada actividad
         st.subheader("Estado de cada actividad")
 
         for act in st.session_state.actividades:
@@ -97,18 +97,18 @@ elif opcion == "Ejercicio 3":
     
     else:
 
-        # 1️⃣ Definir función
+        # 1 Definir función
         def calcular_retorno(actividad, tasa, meses):
             return actividad["presupuesto"] * tasa * meses
 
-        # 2️⃣ Inputs
+        # 2 Inputs
         tasa = st.slider("Seleccione la tasa de retorno (%)", 0.0, 1.0, 0.1)
         meses = st.number_input("Ingrese la cantidad de meses", min_value=1, step=1)
 
-        # 3️⃣ Botón
+        # 3 Botón
         if st.button("Calcular retorno esperado"):
 
-            # 4️⃣ Aplicar programación funcional
+            # 4 Aplicar programación funcional
             retornos = list(
                 map(
                     lambda act: {
@@ -119,7 +119,7 @@ elif opcion == "Ejercicio 3":
                 )
             )
 
-            # 5️⃣ Mostrar resultados
+            # 5 Mostrar resultados
             st.subheader("Resultados de Retorno Esperado")
 
             for r in retornos:
@@ -133,7 +133,7 @@ elif opcion == "Ejercicio 4":
 
     st.title("Ejercicio 4 – Programación Orientada a Objetos")
 
-    # 1️⃣ Definir la clase
+    # 1 Definir la clase
     class Actividad:
 
         def __init__(self, nombre, tipo, presupuesto, gasto_real):
@@ -155,14 +155,14 @@ elif opcion == "Ejercicio 4":
                 f"Diferencia: {diferencia}"
             )
 
-    # 2️⃣ Verificar que existan actividades
+    # 2 Verificar que existan actividades
     if "actividades" not in st.session_state or not st.session_state.actividades:
         st.warning("Primero debe registrar actividades en el Ejercicio 2.")
     else:
 
         st.subheader("Evaluación de Actividades como Objetos")
 
-        # 3️⃣ Convertir diccionarios en objetos
+        # 3 Convertir diccionarios en objetos
         objetos_actividades = [
             Actividad(
                 act["nombre"],
@@ -173,7 +173,7 @@ elif opcion == "Ejercicio 4":
             for act in st.session_state.actividades
         ]
 
-        # 4️⃣ Mostrar información de cada objeto
+        # 4 Mostrar información de cada objeto
         for obj in objetos_actividades:
 
             st.write(obj.mostrar_info())
